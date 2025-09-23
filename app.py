@@ -18,7 +18,13 @@ def createTask():
         "message": "Task created",
     })
 
-
+@app.route("/tasks", methods=["GET"])
+def getTasks():
+    taskList = [task.toDict() for task in tasks] #crio uma nova lista e coloco um for dentro dela
+    return jsonify({
+        "tasks": taskList,
+        "totalTasks": len(taskList),
+    })
 
 if __name__ == "__main__": #estamos garantindo que só vamos subir o debug true quando estamos rodando apenas na maquina
     app.run(debug=True) #permite que informe varias coisas que estão ocorrendo nos logs
