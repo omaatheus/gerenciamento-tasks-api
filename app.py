@@ -15,6 +15,7 @@ def createTask():
     tasks.append(newTask)
 
     return jsonify({
+        "id": newTask.id,
         "message": "Task created",
     })
 
@@ -56,6 +57,7 @@ def updateTask(id):
     task.description = data["description"]
     task.completed = data["completed"]
     return jsonify({
+        "id": task.id,
         "message": "Task updated",
     })
 
@@ -65,8 +67,6 @@ def deleteTask(id):
     for t in tasks:
         if t.id == id:
             task = t
-
-
 
     if not task: #se não houver a task
         return jsonify({
