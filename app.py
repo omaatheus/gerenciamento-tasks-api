@@ -59,6 +59,25 @@ def updateTask(id):
         "message": "Task updated",
     })
 
+@app.route("/tasks/<int:id>", methods=["DELETE"])
+def deleteTask(id):
+    task = None
+    for t in tasks:
+        if t.id == id:
+            task = t
+
+
+
+    if not task: #se não houver a task
+        return jsonify({
+            "message": "Task not found",
+        }), 404
+
+    tasks.remove(task)
+    return jsonify({
+        "message": "Task deleted",
+    })
+
 
 if __name__ == "__main__": #estamos garantindo que só vamos subir o debug true quando estamos rodando apenas na maquina
     app.run(debug=True) #permite que informe varias coisas que estão ocorrendo nos logs
